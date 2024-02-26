@@ -5,13 +5,13 @@ on:
 
 jobs:
   super-lint:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest  # Change "macos-latest" to "ubuntu-latest"
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Run Super-Linter
-        uses: github/super-linter@v3.17.1
+        uses: github/super-linter@v3.17.1  # Replace with the version you want
         env:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
