@@ -1,15 +1,25 @@
-name: Super-Linter
+name: Super Linter
 
 on:
-  push
+  push:
+    branches:
+      - main
+      - master
 
 jobs:
-  super-lint:
-    runs-on: ubuntu-latest  # Change "macos-latest" to "ubuntu-latest"
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+  lint:
+    runs-on: ubuntu-latest
 
-        env:
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Super-Linter
+      uses: github/super-linter@v4
+      env:
+        RUN_LOCAL: false
+        DEFAULT_BRANCH: main
+        VALIDATE_ALL_CODEBASE: false
+        VALIDATE_JAVA: true
+        FILTER_REGEX_EXCLUDE: '(.*/docs/.*|.*\.md|.*\.json|.*\.yml|.*\.yaml)'
+
